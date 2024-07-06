@@ -1,13 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from "next/server";
 const { cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 const admin = require('firebase-admin');
-const serviceAccount = require('../../firebase-test-serviceAccount.json'); // 秘密鍵を取得
+const serviceAccount = require('../../../firebase-test-serviceAccount.json'); // 秘密鍵を取得
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export function POST(request: NextRequest): NextResponse {
   const COLLECTION_NAME = 'users';
   //　初期化する
   if (admin.apps.length === 0) {
@@ -17,13 +14,11 @@ export default async function handler(
   }
   const db = getFirestore();
 
-  if (req.method === 'POST') {
     const docRef = db.collection(COLLECTION_NAME).doc();
     const insertData = {
       id: '1',
       name: 'Symfo',
     };
     docRef.set(insertData);
+    return NextResponse.json({ message: 'success' });
   }
-  res.status(200);
-}

@@ -5,7 +5,12 @@ import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   const insertUser = async () => {
-    await axios.post('/api/user');
+    try {
+      const res = await axios.post('/api/users');
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
