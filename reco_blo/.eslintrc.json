@@ -1,3 +1,21 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-unused-vars": "off",
+    "no-restricted-imports": ["error", { "patterns": ["../"] }],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "type",
+          "internal",
+          ["parent", "sibling"],
+          "object",
+          "index"
+        ]
+      }
+    ]
+  }
 }
