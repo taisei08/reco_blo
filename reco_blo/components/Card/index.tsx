@@ -63,7 +63,7 @@ export const Card: FC<Props> = ({ item }) => {
           <audio ref={audioRef} src={"sounds/sample_01.mp3"} />
 
           <Image
-            src={item.url}
+            src="/images/sample_img.png"
             alt="image"
             fill
             style={{ objectFit: "cover", borderRadius: "10px" }}
