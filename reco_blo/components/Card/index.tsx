@@ -60,7 +60,7 @@ export const Card: FC<Props> = ({ item }) => {
     <div className="w-full rounded-xl p-3 border border-gray-400">
       {item ? (
         <div className="relative aspect-square w-full">
-          <audio ref={audioRef} src={"sounds/sample_01.mp3"} />
+          <audio ref={audioRef} src={item.audio_url} />
 
           <Image
             src="/images/sample_img.png"
