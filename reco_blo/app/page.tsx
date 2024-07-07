@@ -12,7 +12,7 @@ import Loading from "./Loading";
 
 export default function Home() {
   const [showText, setShowText] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser]:any = useState(null);
   const data = PostData;
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-3 gap-7">
-        {posts.data.map((item) => (
+        {posts.data.map((item: any) => (
           <Card item={item} key={item.title} />
         ))}
       </div>

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { collection, query, where, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
-export async function GET({ params }: { params: { commentId: number } }): Promise<NextResponse> {
+export async function GET({ params }: { params: { commentId: any } }): Promise<NextResponse> {
   const { commentId } = params;
 
   if (!commentId) {
