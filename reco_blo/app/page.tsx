@@ -11,6 +11,8 @@ import useSWR from "swr";
 
 export default function Home() {
   const [showText, setShowText] = useState(false);
+  const [user, setUser] = useState(null);
+  const data = PostData;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,10 +33,13 @@ export default function Home() {
       </div>
     );
 
+  console.log("user", user?.uid);
+
   return (
     <main className=" max-w-5xl mx-auto my-[250px]">
       <Header />
-      <div className="flex justify-end">
+      <div className="flex justify-between items-end">
+        <LoginButton user={user} setUser={setUser} />
         <UploadMP3 />
       </div>
 
