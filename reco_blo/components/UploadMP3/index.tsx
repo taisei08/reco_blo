@@ -4,13 +4,19 @@ import React, { useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { MdOutlineDriveFolderUpload } from "react-icons/md";
 import { RiUploadLine } from "react-icons/ri";
-// import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { storage } from "./firebaseConfig";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  getStorage,
+} from "firebase/storage";
 
 export const UploadMP3 = () => {
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState("");
+
+  const storage = getStorage();
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) {
