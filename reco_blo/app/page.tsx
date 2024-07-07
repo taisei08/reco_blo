@@ -1,27 +1,43 @@
-"use client"
+"use client";
 
-import axios from 'axios';
-import type { NextPage } from 'next';
+import { useEffect, useState } from "react";
+import Loading from "./Loading";
+import { PostData } from "@/Mocks/PostData";
+import { Card } from "@/components/Card";
+import { Header } from "@/components/Header";
+import { UploadMP3 } from "@/components/UploadMP3";
 
-const Home: NextPage = () => {
-  const insertUser = async () => {
-    try {
-      const res = await axios.post('/api/users');
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+export default function Home() {
+  const [showText, setShowText] = useState(false);
+  const data = PostData;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowText(true);
+    }, 2000); // 2.5秒後に表示
+
+    return () => clearTimeout(timer); // クリーンアップタイマー
+  }, []);
+
+  if (!showText)
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%]">
+        <Loading />
+      </div>
+    );
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <button
-        className="mt-4 w-60 rounded-full bg-green-500 py-2 px-4 font-bold text-white hover:bg-green-700"
-        onClick={() => insertUser()}>
-        Insert User
-      </button>
-    </div>
-  );
-};
+    <main className=" max-w-5xl mx-auto my-[250px]">
+      <Header />
+      <div className="flex justify-end">
+        <UploadMP3 />
+      </div>
 
-export default Home;
+      <div className="grid grid-cols-3 gap-7">
+        {data.map((item) => (
+          <Card item={item} key={item.name} />
+        ))}
+      </div>
+    </main>
+  );
+}

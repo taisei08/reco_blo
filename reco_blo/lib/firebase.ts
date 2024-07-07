@@ -1,5 +1,6 @@
-// Import the functions you need from the SDKs you need
+// 必要な SDK をインポート
 import { getApp, getApps, initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
@@ -10,11 +11,7 @@ import {
   FIREBASE_STORAGE_BUCKET,
 } from '../app/constant/env'
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase の設定
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
@@ -25,10 +22,5 @@ const firebaseConfig = {
   measurementId: FIREBASE_MEASUREMENT_ID
 };
 
-const { getFirestore } = require('firebase-admin/firestore');
-
-// Initialize Firebase
-export const db = getFirestore();
-export const app = initializeApp(firebaseConfig);
-export const initializeFirebaseApp = () =>
-  !getApps().length ? initializeApp(firebaseConfig) : getApp()
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+export const db = getFirestore(app);
