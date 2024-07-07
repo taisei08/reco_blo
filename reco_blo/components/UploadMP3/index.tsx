@@ -1,11 +1,12 @@
 "use client";
 import { Progress } from "@radix-ui/themes";
 import React, { useState } from "react";
-import { FiPlusCircle } from "react-icons/fi";
-import { MdOutlineDriveFolderUpload } from "react-icons/md";
 import { RiUploadLine } from "react-icons/ri";
-// import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { storage } from "./firebaseConfig";
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "@/lib/firebase";
+import { db } from "@/lib/firebase";
+
 
 export const UploadMP3 = () => {
   const [file, setFile] = useState(null);
@@ -24,7 +25,7 @@ export const UploadMP3 = () => {
       return;
     }
 
-    const storageRef = ref(storage, `mp3/${file.name}`);
+    const storageRef = ref(storage, `audio/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -42,6 +43,31 @@ export const UploadMP3 = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setDownloadURL(downloadURL);
           console.log("File available at", downloadURL);
+          // ドキュメントを挿入する関数
+          const insertDocument = async () => {
+            const COLLECTION_NAME = 'posts';
+            const insertData = {
+              title: '1',
+              description: 'あいうえお',
+              audio_url: downloadURL,
+              created_at: new Date(),
+              user_id: 0,
+            };
+
+            try {
+              const docRef = doc(collection(db, COLLECTION_NAME));
+              await setDoc(docRef, insertData);
+              return { message: 'success' };
+            } catch (error) {
+              console.error('Error adding document: ', error);
+              return { message: 'error', error: error.message };
+            }
+          };
+
+          // 関数を呼び出して結果を表示
+          insertDocument().then((response) => {
+            console.log(response);
+          });
         });
       }
     );
