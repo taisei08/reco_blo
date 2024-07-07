@@ -7,9 +7,10 @@ import { config, useTransition, animated } from "react-spring";
 type Props = {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
+  downloadUrl: string;
 };
 
-export const AlartModal: FC<Props> = ({ isOpen, setIsOpen }) => {
+export const AlartModal: FC<Props> = ({ isOpen, setIsOpen, downloadUrl }) => {
   const transitionsLoginModal = useTransition(isOpen, {
     from: { transform: "translate(-50%, -50%) scale(0.95)" },
     enter: { transform: "translate(-50%, -50%) scale(1.05)" },
@@ -41,12 +42,11 @@ export const AlartModal: FC<Props> = ({ isOpen, setIsOpen }) => {
                 <Dialog.Description className="mt-8"></Dialog.Description>
                 <Dialog.Close asChild>
                   <div className="flex justify-center">
-                    <button
-                      onClick={() => setIsOpen(false)}
-                      className="px-3 py-2 border bg-red-500 text-white rounded-full"
-                    >
-                      承諾します
-                    </button>
+                    <a href={downloadUrl} download>
+                      <button className="px-3 py-2 bg-red-500 text-white rounded-full">
+                        Download
+                      </button>
+                    </a>
                   </div>
                 </Dialog.Close>
               </animated.div>

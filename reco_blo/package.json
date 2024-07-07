@@ -14,6 +14,7 @@
     "@react-spring/web": "^9.7.3",
     "axios": "^1.7.2",
     "firebase-admin": "^12.2.0",
+    "framer-motion": "^11.2.13",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
