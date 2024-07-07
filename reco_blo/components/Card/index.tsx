@@ -103,7 +103,7 @@ export const Card: FC<Props> = ({ item }) => {
       <AlartModal
         isOpen={isAlartOpen}
         setIsOpen={setIsAlartOpen}
-        downloadUrl={item.audioUrl}
+        downloadUrl={item.audio_url}
       />
       <div className="mt-2">
         <div className="flex justify-between">
