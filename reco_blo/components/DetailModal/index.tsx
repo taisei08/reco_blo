@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Loading = () => (
-  <div className="w-[300px] mx-auto aspect-square rounded-xl p-3 border bg-gray-300 animate-pulse"></div>
+  <Image src="/images/sample_img.png" alt="image" width={200} height={200} className="mx-auto rounded-xl border"/>
 );
 
 export const DetailModal: FC<Props> = ({ isOpen, setIsOpen }) => {
