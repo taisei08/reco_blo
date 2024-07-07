@@ -8,7 +8,7 @@ import { storage } from "@/lib/firebase";
 import { db } from "@/lib/firebase";
 
 
-export const UploadMP3 = () => {
+export const UploadMP3 = (uid) => {
   const [file, setFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState("");
@@ -51,7 +51,7 @@ export const UploadMP3 = () => {
               description: 'あいうえお',
               audio_url: downloadURL,
               created_at: new Date(),
-              user_id: 0,
+              user_id: uid,
             };
 
             try {

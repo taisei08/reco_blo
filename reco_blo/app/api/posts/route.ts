@@ -9,7 +9,7 @@ export async function GET(): Promise<NextResponse> {
   const postsQuery = query(postsCollection, orderBy('created_at', 'desc'));
 
   try {
-    const querySnapshot = await getDocs(postsCollection);
+    const querySnapshot = await getDocs(postsQuery);
     console.log(querySnapshot)
     const data = [];
 

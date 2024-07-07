@@ -2,12 +2,13 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
+import LoginButton from "@/components/LoginButton";
 import { PostData } from "@/Mocks/PostData";
 import { Card } from "@/components/Card";
 import { Header } from "@/components/Header";
 import { UploadMP3 } from "@/components/UploadMP3";
 import Loading from "./Loading";
-import useSWR from "swr";
 
 export default function Home() {
   const [showText, setShowText] = useState(false);
@@ -40,7 +41,7 @@ export default function Home() {
       <Header />
       <div className="flex justify-between items-end">
         <LoginButton user={user} setUser={setUser} />
-        <UploadMP3 />
+        {user && <UploadMP3 uid={user.uid}/>}
       </div>
 
       <div className="grid grid-cols-3 gap-7">
