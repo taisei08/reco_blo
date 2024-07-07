@@ -36,9 +36,9 @@ export const AlartModal: FC<Props> = ({ isOpen, setIsOpen, downloadUrl }) => {
                 className="data-[state=open]:animate-contentShow fixed left-[50%] top-[50%] z-20 max-h-[85vh] w-[86vw] max-w-[360px] translate-x-[-50%] translate-y-[-50%] rounded-2xl bg-white px-6 py-6 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] md:w-[90vw]"
               >
                 <Dialog.Title className="bg-white text-center text-lg font-semibold text-gray-800">
-                  Alart
+                  警告
                 </Dialog.Title>
-                <p>aaa</p>
+                <p>素材を利用する場合はクレジット表記をしてください。</p>
                 <Dialog.Description className="mt-8"></Dialog.Description>
                 <Dialog.Close asChild>
                   <div className="flex justify-center">
