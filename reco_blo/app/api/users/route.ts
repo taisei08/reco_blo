@@ -1,9 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { initializeFirebaseApp } from '@/lib/firebase';
 import { db } from "@/lib/firebase";
 
+export function GET(): NextResponse {
+  const COLLECTION_NAME = 'posts';
+
+  const docRef = db.collection(COLLECTION_NAME).orderBy('created_at', 'desc');
+  console.log("aaa")
+  docRef.get().then((querySnapshot) => {
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data());
+    });
+    return NextResponse.json(data);
+  });
+}
+
+
 export function POST(request: NextRequest): NextResponse {
-  initializeFirebaseApp();
   const COLLECTION_NAME = 'users';
 
   const docRef = db.collection(COLLECTION_NAME).doc();
