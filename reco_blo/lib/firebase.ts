@@ -1,6 +1,7 @@
 // 必要な SDK をインポート
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
@@ -24,3 +25,4 @@ const firebaseConfig = {
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 export const db = getFirestore(app);
+export const storage = getStorage();
