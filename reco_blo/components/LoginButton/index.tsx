@@ -48,7 +48,7 @@ const LoginButton: FC<Props> = ({ user, setUser }) => {
     if (user) {
       try {
         const querySnapshot = await getDocs(collection(db, "records"));
-        const userRecords = querySnapshot.docs
+        const userRecords: any = querySnapshot.docs
           .filter((doc) => doc.data().uid === user.uid)
           .map((doc) => doc.data());
         setRecords(userRecords);

@@ -8,12 +8,12 @@ import { storage } from "@/lib/firebase";
 import { db } from "@/lib/firebase";
 
 
-export const UploadMP3 = (uid) => {
-  const [file, setFile] = useState(null);
+export const UploadMP3 = (uid: any) => {
+  const [file, setFile]:any = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState("");
 
-  const handleFileChange = (e) => {
+  const handleFileChange = (e:any) => {
     if (e.target.files[0]) {
       setFile(e.target.files[0]);
     }
@@ -58,7 +58,7 @@ export const UploadMP3 = (uid) => {
               const docRef = doc(collection(db, COLLECTION_NAME));
               await setDoc(docRef, insertData);
               return { message: 'success' };
-            } catch (error) {
+            } catch (error:any) {
               console.error('Error adding document: ', error);
               return { message: 'error', error: error.message };
             }
