@@ -16,7 +16,7 @@ export async function GET({ params }: { params: { postId: number } }): Promise<N
 
   try {
     const querySnapshot = await getDocs(commentsQuery);
-    const data = [];
+    const data: any = [];
 
     querySnapshot.forEach((doc) => {
       data.push(doc.data());
