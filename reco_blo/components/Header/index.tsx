@@ -43,12 +43,14 @@ export const Header: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center p-5">
         <div className="text-white text-2xl font-bold">RECBLO</div>
         <div className="absolute -z-30">
-          <Image
-            src="/images/blue_block.png"
-            alt="logo"
-            width={100}
-            height={100}
-          />
+          <div className="relative aspect-square w-[65px] left-4">
+            <Image
+              src="/images/blue_block.png"
+              alt="logo"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
         <nav className="flex space-x-4">
           <a href="#home" className="text-white hover:text-gray-300">
