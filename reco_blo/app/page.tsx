@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { Theme } from "@radix-ui/themes";
 import Loading from "./Loading";
 import LoginButton from "@/components/LoginButton";
 import { PostData } from "@/Mocks/PostData";
@@ -37,19 +38,21 @@ export default function Home() {
 
   return (
     <main className=" max-w-5xl mx-auto my-[250px]">
-      <Header />
-      <div className="flex justify-between items-end">
-        <LoginButton user={user} setUser={setUser} />
-        {user && <UploadMP3 uid={user.uid} />}
-      </div>
-
-      <div className="mt-4">
-        <div className="grid grid-cols-3 gap-7">
-          {posts.data.map((item: any) => (
-            <Card item={item} key={item.title} />
-          ))}
+      <Theme>
+        <Header />
+        <div className="flex justify-between items-end">
+          <LoginButton user={user} setUser={setUser} />
+          {user && <UploadMP3 uid={user.uid} />}
         </div>
-      </div>
+
+        <div className="mt-4">
+          <div className="grid grid-cols-3 gap-7">
+            {posts.data.map((item: any) => (
+              <Card item={item} key={item.title} />
+            ))}
+          </div>
+        </div>
+      </Theme>
     </main>
   );
 }

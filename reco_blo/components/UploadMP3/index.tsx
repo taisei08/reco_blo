@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { RiUploadLine } from "react-icons/ri";
 import { collection, doc, setDoc } from "firebase/firestore";
-import { Progress } from "@radix-ui/themes";
+import { Progress, Theme } from "@radix-ui/themes";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import { db } from "@/lib/firebase";
