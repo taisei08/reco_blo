@@ -81,13 +81,13 @@ export const Card: FC<Props> = ({ item }) => {
       ) : (
         <Loading />
       )}
-      <div className="">
+      <div className="mt-2">
         <div>
           <p>{item.name}</p>
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             <FaHeart />
             <p className="text-black">{item.like}</p>
-          </div>
+          </div> */}
         </div>
         <div className="flex gap-2">
           {item?.tags?.map((tag: string, index: number) => (
