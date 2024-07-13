@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { Theme } from "@radix-ui/themes";
+import { collection, onSnapshot } from "firebase/firestore";
 import Loading from "./Loading";
 import LoginButton from "@/components/LoginButton";
 import { PostData } from "@/Mocks/PostData";
@@ -11,11 +12,14 @@ import { Card } from "@/components/Card";
 import { Header } from "@/components/Header";
 import { UploadMP3 } from "@/components/UploadMP3";
 import "@radix-ui/themes/styles.css";
+import { db } from "@/lib/firebase";
 
 export default function Home() {
   const [showText, setShowText] = useState(false);
   const [user, setUser]: any = useState(null);
   const data = PostData;
+
+  // const [posts, setPosts]: any = useState({ data: [] });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,7 +29,21 @@ export default function Home() {
     return () => clearTimeout(timer); // クリーンアップタイマー
   }, []);
 
-  const { data: posts }: any = useSWR("/api/posts", axios);
+  const { data: posts, mutate: mutatePosts }: any = useSWR("/api/posts", axios);
+
+  // useEffect(() => {
+  //   const unsubscribe = onSnapshot(collection(db, "posts"), (snapshot) => {
+  //     const updatedPosts = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     setPosts(updatedPosts);
+  //   });
+
+  //   return () => unsubscribe(); // コンポーネントのアンマウント時にunsubscribe
+  // }, []);
+
+  console.log("posts", posts);
 
   if (!showText)
     return (
@@ -42,7 +60,7 @@ export default function Home() {
         <Header />
         <div className="flex justify-between items-end">
           <LoginButton user={user} setUser={setUser} />
-          {user && <UploadMP3 uid={user.uid} />}
+          {user && <UploadMP3 uid={user.uid} mutate={mutatePosts} />}
         </div>
 
         <div className="mt-4">

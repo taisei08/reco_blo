@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { RiUploadLine } from "react-icons/ri";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { Progress, Theme } from "@radix-ui/themes";
@@ -9,7 +9,12 @@ import { storage } from "@/lib/firebase";
 import { db } from "@/lib/firebase";
 import "@radix-ui/themes/styles.css";
 
-export const UploadMP3 = (uid: any) => {
+type Props = {
+  uid: string;
+  mutate: any;
+};
+
+export const UploadMP3: FC<Props> = ({ uid, mutate }) => {
   const [file, setFile]: any = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState("");
@@ -58,6 +63,7 @@ export const UploadMP3 = (uid: any) => {
             try {
               const docRef = doc(collection(db, COLLECTION_NAME));
               await setDoc(docRef, insertData);
+              mutate();
               return { message: "success" };
             } catch (error: any) {
               console.error("Error adding document: ", error);
