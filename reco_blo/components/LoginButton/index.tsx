@@ -48,7 +48,7 @@ const LoginButton: FC<Props> = ({ user, setUser }) => {
     if (user) {
       try {
         const querySnapshot = await getDocs(collection(db, "records"));
-        const userRecords = querySnapshot.docs
+        const userRecords: any = querySnapshot.docs
           .filter((doc) => doc.data().uid === user.uid)
           .map((doc) => doc.data());
         setRecords(userRecords);
@@ -65,25 +65,29 @@ const LoginButton: FC<Props> = ({ user, setUser }) => {
   }, [user]);
 
   return (
-    <div className="max-w-md bg-white shadow-md rounded px-8 py-6">
+    <div>
       {user ? (
-        <div>
-          <h1 className="text-xl font-bold mb-4">{user.displayName}</h1>
-          <button
-            className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-            onClick={signOutUser}
-          >
-            Sign Out
-          </button>
-          <p className="mt-2 text-gray-600">{user.uid}</p>
+        <div className="">
+          <div className="max-w-md bg-white border border-gray-400 rounded-xl px-6 py-4">
+            <h1 className="text-xl font-bold ">{user.displayName}</h1>
+            <p className="mb-2 text-gray-600">{user.uid}</p>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+              onClick={signOutUser}
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
       ) : (
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-          onClick={signInWithGoogle}
-        >
-          Sign in with Google
-        </button>
+        <div className="">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-xl"
+            onClick={signInWithGoogle}
+          >
+            Sign in with Google
+          </button>
+        </div>
       )}
     </div>
   );

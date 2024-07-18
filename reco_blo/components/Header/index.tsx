@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 export const Header: React.FC = () => {
@@ -7,7 +8,7 @@ export const Header: React.FC = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const scrollDownSpeed = 20; // 下にスクロール時の速度閾値
-  const scrollUpSpeed = 55; // 上にスクロール時の速度閾値
+  const scrollUpSpeed = 50; // 上にスクロール時の速度閾値
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -41,6 +42,14 @@ export const Header: React.FC = () => {
     >
       <div className="container mx-auto flex justify-between items-center p-5">
         <div className="text-white text-2xl font-bold">RECBLO</div>
+        <div className="absolute -z-30">
+          <Image
+            src="/images/blue_block.png"
+            alt="logo"
+            width={100}
+            height={100}
+          />
+        </div>
         <nav className="flex space-x-4">
           <a href="#home" className="text-white hover:text-gray-300">
             Home

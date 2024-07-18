@@ -3,16 +3,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { Theme } from "@radix-ui/themes";
+import Loading from "./Loading";
 import LoginButton from "@/components/LoginButton";
 import { PostData } from "@/Mocks/PostData";
 import { Card } from "@/components/Card";
 import { Header } from "@/components/Header";
 import { UploadMP3 } from "@/components/UploadMP3";
-import Loading from "./Loading";
+import "@radix-ui/themes/styles.css";
 
 export default function Home() {
   const [showText, setShowText] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser]: any = useState(null);
   const data = PostData;
 
   useEffect(() => {
@@ -23,10 +25,8 @@ export default function Home() {
     return () => clearTimeout(timer); // クリーンアップタイマー
   }, []);
 
-  const { data: posts}: any = useSWR("/api/posts", axios)
-    
+  const { data: posts }: any = useSWR("/api/posts", axios);
 
-  
   if (!showText)
     return (
       <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%]">
@@ -38,17 +38,21 @@ export default function Home() {
 
   return (
     <main className=" max-w-5xl mx-auto my-[250px]">
-      <Header />
-      <div className="flex justify-between items-end">
-        <LoginButton user={user} setUser={setUser} />
-        {user && <UploadMP3 uid={user.uid}/>}
-      </div>
+      <Theme>
+        <Header />
+        <div className="flex justify-between items-end">
+          <LoginButton user={user} setUser={setUser} />
+          {user && <UploadMP3 uid={user.uid} />}
+        </div>
 
-      <div className="grid grid-cols-3 gap-7">
-        {posts.data.map((item) => (
-          <Card item={item} key={item.title} />
-        ))}
-      </div>
+        <div className="mt-4">
+          <div className="grid grid-cols-3 gap-7">
+            {posts.data.map((item: any) => (
+              <Card item={item} key={item.title} />
+            ))}
+          </div>
+        </div>
+      </Theme>
     </main>
   );
 }

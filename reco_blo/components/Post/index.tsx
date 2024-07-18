@@ -26,10 +26,14 @@ export const Post: FC<Props> = ({ post }) => {
       {/* <h2>{post.title}</h2>
       <p>{post.content}</p> */}
       <div>
-        <h3>Comments</h3>
-        {comments.map((comment: any) => (
-          <p key={comment.id}>{comment.text}</p>
-        ))}
+        {/* <h3>Comments</h3> */}
+        <div className="my-2 border-b border-gray-300">
+          {comments.map((comment: any) => (
+            <div key={comment.id} className="mt-1">
+              <p className="py-1 border-t border-gray-300">{comment.text}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="flex justify-between gap-5">
         <input

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -11,7 +11,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     const querySnapshot = await getDocs(postsQuery);
     console.log(querySnapshot)
-    const data = [];
+    const data: any = [];
 
     querySnapshot.forEach((doc) => {
       data.push(doc.data());
